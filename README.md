@@ -1,7 +1,7 @@
 
 # 项目发布快照
 
-[![license](https://img.shields.io/badge/license-Apache%202.0-blue)](http://www.apache.org/licenses/LICENSE-2.0.html) [![Central](https://img.shields.io/badge/maven%20central-v1-brightgreen)](https://search.maven.org/artifact/com.viiyue.plugins/viiyue-release-snapshot/1/pom)
+[![license](https://img.shields.io/badge/license-Apache%202.0-blue)](http://www.apache.org/licenses/LICENSE-2.0.html) [![Central](https://img.shields.io/badge/maven%20central-v1-brightgreen)](https://search.maven.org/artifact/com.viiyue.plugins/plugin-release-parent/1/pom)
 
 用于抽离项目发布到Maven中央库的一些基础配置，从而使子项目可以忽略这些繁琐的基础信息，仅关注于当前项目所需的配置。
 
