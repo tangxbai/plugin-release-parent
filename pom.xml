@@ -1,0 +1,248 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.viiyue.plugins</groupId>
+	<artifactId>plugin-release-parent</artifactId>
+	<version>1</version>
+	<packaging>pom</packaging>
+
+	<name>plugin-release-parent</name>
+	<url>https://github.com/tangxbai/plugin-release-parent</url>
+	<description>Plugin release snapshot</description>
+
+	<inceptionYear>2019</inceptionYear>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>xbai</id>
+			<name>tangxbai</name>
+			<email>tangxbai@hotmail.com</email>
+			<timezone>GMT+8</timezone>
+			<url>https://github.com/tangxbai</url>
+			<roles>
+				<role>Java Developer</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<scm>
+		<url>https://github.com/tangxbai/plugin-release-parent.git</url>
+		<connection>scm:git:git@github.com:tangxbai/plugin-release-parent.git</connection>
+		<developerConnection>scm:git:git@github.com:tangxbai/plugin-release-parent.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+
+	<issueManagement>
+		<system>GitHub Issue Management</system>
+		<url>https://github.com/tangxbai/plugin-release-parent/issues</url>
+	</issueManagement>
+
+	<repositories>
+		<repository>
+			<id>ossrh</id>
+			<name>Sonatype Nexus Snapshots</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<name>Sonatype Nexus Snapshots</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<name>Nexus Release Repository</name>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+		</repository>
+	</distributionManagement>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<gpg.version>1.6</gpg.version>
+		<source.version>3.1.0</source.version>
+		<javadoc.version>3.1.1</javadoc.version>
+		<compiler.version>3.8.1</compiler.version>
+		<license.version>3.0</license.version>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${compiler.version}</version>
+				<configuration>
+					<optimize>true</optimize>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+		<resources>
+			<resource>
+				<directory>${project.basedir}/src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>${project.basedir}</directory>
+				<targetPath>META-INF</targetPath>
+				<includes>
+					<include>NOTICE</include>
+					<include>LICENSE</include>
+					<include>README.md</include>
+					<include>CHANGELOG.md</include>
+				</includes>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>src/test/java</directory>
+			</testResource>
+			<testResource>
+				<directory>src/test/resources</directory>
+			</testResource>
+		</testResources>
+	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${javadoc.version}</version>
+				<reportSets>
+					<reportSet>
+						<id>default</id>
+						<reports>
+							<report>javadoc</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+		</plugins>
+	</reporting>
+
+	<profiles>
+		<profile>
+			<id>license</id>
+			<activation>
+				<file>
+					<exists>${basedir}/license.txt</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.mycila</groupId>
+						<artifactId>license-maven-plugin</artifactId>
+						<version>${license.version}</version>
+						<executions>
+							<execution>
+								<phase>install</phase>
+								<goals>
+									<goal>format</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<header>${project.basedir}/license.txt</header>
+							<excludes>
+								<exclude>**/*.dat</exclude>
+								<exclude>**/*.lck</exclude>
+								<exclude>**/*.log</exclude>
+								<exclude>**/*.ctrl</exclude>
+								<exclude>.factorypath</exclude>
+								<exclude>.gitattributes</exclude>
+								<exclude>mvnw</exclude>
+								<exclude>mvnw.cmd</exclude>
+								<exclude>ICLA</exclude>
+								<exclude>KEYS</exclude>
+								<exclude>NOTICE</exclude>
+								<exclude>LICENSE</exclude>
+							</excludes>
+							<mapping>
+								<xml.vm>XML_STYLE</xml.vm>
+							</mapping>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>${source.version}</version>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>${javadoc.version}</version>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+								<configuration>
+									<doclint>none</doclint>
+									<applyJavadocSecurityFix>false</applyJavadocSecurityFix>
+									<failOnError>false</failOnError>
+									<failOnWarnings>false</failOnWarnings>
+									<additionalparam>-Xdoclint:none</additionalparam>
+									<additionalJOption>-Xdoclint:none</additionalJOption>
+									<encoding>${project.build.sourceEncoding}</encoding>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>${gpg.version}</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>
