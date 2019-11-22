@@ -75,7 +75,7 @@ $ mvn clean install
 "**/.arch-ids"
 "**/.arch-ids/**"
 
-//Bazaar
+// Bazaar
 "**/.bzr"
 "**/.bzr/**"
 
@@ -94,7 +94,7 @@ $ mvn clean install
 "**/.hg/**"
 "**/.hgignore"
 
-// git
+// Git
 "**/.git"
 "**/.git/**"
 "**/.gitignore"
@@ -106,7 +106,7 @@ $ mvn clean install
 "**/ChangeSet"
 "**/ChangeSet/**"
 
-// darcs
+// Darcs
 "**/_darcs"
 "**/_darcs/**"
 "**/.darcsrepo"
@@ -114,7 +114,7 @@ $ mvn clean install
 "**/-darcs-backup*"
 "**/.darcs-temp-mail"
 
-// maven project's temporary files
+// Maven project's temporary files
 "**/target/**"
 "**/test-output/**"
 "**/release.properties"
@@ -122,11 +122,11 @@ $ mvn clean install
 "**/release-pom.xml"
 "**/pom.xml.releaseBackup"
 
-// code coverage tools
+// Code coverage tools
 "**/cobertura.ser"
 "**/.clover/**"
 
-// eclipse project files
+// Eclipse project files
 "**/.classpath"
 "**/.project"
 "**/.settings/**"
@@ -140,10 +140,10 @@ $ mvn clean install
 // Netbeans
 "**/nb-configuration.xml"
 
-// descriptors
+// Descriptors
 "**/MANIFEST.MF"
 
-// binary files - images
+// Binary files - images
 "**/*.jpg"
 "**/*.png"
 "**/*.gif"
@@ -154,17 +154,17 @@ $ mvn clean install
 "**/*.cr2"
 "**/*.xcf"
 
-// binary files - programs
+// Binary files - programs
 "**/*.class"
 "**/*.exe"
 "**/*.dll"
 "**/*.so"
 
-// checksum files
+// Checksum files
 "**/*.md5"
 "**/*.sha1"
 
-// binary files - archives
+// Binary files - archives
 "**/*.jar"
 "**/*.zip"
 "**/*.rar"
@@ -173,7 +173,7 @@ $ mvn clean install
 "**/*.tar.bz2"
 "**/*.gz"
 
-// binary files - documents
+// Binary files - documents
 "**/*.xls"
 
 // ServiceLoader files
@@ -192,29 +192,33 @@ $ mvn clean install
 // Travis
 "**/.travis.yml"
 
-// flash
+// Flash
 "**/*.swf"
 
-// json files
+// Json files
 "**/*.json"
 
-// fonts
+// Fonts
 "**/*.svg"
 "**/*.eot"
 "**/*.ttf"
 "**/*.woff"
 
-// office documents
+// Office documents
 "**/*.xlsx"
 "**/*.docx"
 "**/*.ppt"
 "**/*.pptx"
     
-// others
+// Others
 "**/*.dat"
 "**/*.lck"
 "**/*.log"
 "**/*.ctrl"
+"**/*.providers"
+"**/*.factories"
+"**/*.properties"
+"**/META-INF/**"
 ".factorypath"
 ".gitattributes"
 "mvnw"
