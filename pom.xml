@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 
     Copyright (C) 2019 the original author or authors.
@@ -188,9 +189,8 @@
 								<exclude>**/*.ctrl</exclude>
 								<include>**/*.json</include>
 								<include>**/*.providers</include>
+								<include>**/*.factories</include>
 								<include>**/*.properties</include>
-								<include>**/*.factories</include>
-								<include>**/*.factories</include>
 								<include>**/META-INF/**</include>
 								<exclude>.factorypath</exclude>
 								<exclude>.gitattributes</exclude>
