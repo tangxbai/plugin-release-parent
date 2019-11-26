@@ -1,11 +1,50 @@
 
 # 项目发布快照
 
-[![license](https://img.shields.io/badge/license-Apache%202.0-blue)](http://www.apache.org/licenses/LICENSE-2.0.html) [![Central](https://img.shields.io/badge/maven%20central-v1-brightgreen)](https://search.maven.org/artifact/com.viiyue.plugins/plugin-release-parent/1/pom)
+[![license](https://img.shields.io/badge/license-Apache%202.0-blue)](http://www.apache.org/licenses/LICENSE-2.0.html) [![Central](https://img.shields.io/badge/maven%20central-v2-brightgreen)](https://search.maven.org/artifact/com.viiyue.plugins/plugin-release-parent/2/pom)
 
-用于抽离项目发布到Maven中央库的一些基础配置，从而使子项目可以忽略这些繁琐的基础信息，仅关注于当前项目所需的配置。
+用于抽离项目发布到Maven中央库的一些基础配置，从而使子项目可以忽略这些繁琐的配置，仅关注于当前项目所需的配置。
 
-凡是继承此pom配置的子项目使用一些基础命令即可将项目发布到Maven中央库。
+凡是继承此pom配置的子项目将获得这些公用配置，并使用一些基础命令即可将项目发布到Maven中央库。
+
+
+
+## 公共内容
+
+- Licenses
+  - license
+    - name - The Apache Software License, Version 2.0
+    - url - http://www.apache.org/licenses/LICENSE-2.0.txt
+- Developer
+  - developer
+    - id - xbai
+    - name - tangxbai
+    - email - tangxbai@hotmail.com
+    - url - https://github.com/tangxbai
+    - roles - Java Developer
+- Repositories
+  - repository
+    - id - ossrh
+    - name - Sonatype Nexus Snapshots
+    - url - https://oss.sonatype.org/content/repositories/snapshots
+- DistributionManagement
+  - snapshotRepository
+    - id - ossrh
+    - name - Sonatype Nexus Snapshots
+    - url - https://oss.sonatype.org/content/repositories/snapshots
+  - repository
+    - id - ossrh
+    - name - Nexus Release Repository
+    - url - https://oss.sonatype.org/service/local/staging/deploy/maven2
+- Profiles
+  - default
+    - 生成项目相关jar包 - xxx.jar
+  - license
+    - 添加文件许可证头部注释
+  - release
+    - 生成项目jar源文件 - xxx-source.jar
+    - 生成项目文档 - xxx-javadoc.jar
+    - 对文件进行签名 - xxx-xxx.xxx.asc
 
 
 
@@ -25,208 +64,210 @@
 
 
 
-## 发布到中央仓库
+## 基础命令
 
 ```shell
+# 清空安装目录
+$ mvn clean
+
+# 清空并打包项目资源
+$ mvn clean package
+
+# 清空并安装项目资源（会判断是否有license.txt文件，有则自动添加文件头部许可证注释）
+$ mvn clean install
+$ mvn clean install -Plicense
+
+# 清空并打包项目然后发布资源到Maven中央库
 $ mvn clean deploy -Prelease
 ```
 
 
 
-## 生成License注释
+## 许可证忽略文件规则
 
-```shell
-$ mvn clean install -Plicense
-$ mvn clean install
-```
+```ini
+[Mac]
+**/.DS_Store
 
-以上两种命令都可以，只有在根目录下存在 `license.txt` 许可证头部文件才会自动为指定文件添加许可证头部信息。以下文件会被忽略添加头部许可证信息：
+[RCS]
+**/RCS
+**/RCS/**
 
-```java
-// Miscellaneous typical temporary files
-"**/*~"
-"**/#*#"
-"**/.#*"
-"**/%*%"
-"**/._*"
-"**/.repository/**"
+[SCCS]
+**/SCCS
+**/SCCS/**
 
-// CVS
-"**/CVS"
-"**/CVS/**"
-"**/.cvsignore"
+[CVS]
+**/CVS
+**/CVS/**
+**/.cvsignore
 
-// RCS
-"**/RCS"
-"**/RCS/**"
+[Arch]
+**/.arch-ids
+**/.arch-ids/**
 
-// SCCS
-"**/SCCS"
-"**/SCCS/**"
+[Flash]
+**/*.swf
 
-// Visual SourceSafe
-"**/vssver.scc"
+[Fonts]
+**/*.svg
+**/*.eot
+**/*.ttf
+**/*.woff
 
-// Subversion
-"**/.svn"
-"**/.svn/**"
+[Bazaar]
+**/.bzr
+**/.bzr/**
 
-// Arch
-"**/.arch-ids"
-"**/.arch-ids/**"
+[Git]
+**/.git
+**/.git/**
+**/.gitignore
+**/.gitmodules
 
-// Bazaar
-"**/.bzr"
-"**/.bzr/**"
+[Darcs]
+**/_darcs
+**/_darcs/**
+**/.darcsrepo
+**/.darcsrepo/**
+**/-darcs-backup*
+**/.darcs-temp-mail
 
-//SurroundSCM
-"**/.MySCMServerInfo"
+[Travis]
+**/.travis.yml
 
-// Mac
-"**/.DS_Store"
+[BitKeeper]
+**/BitKeeper
+**/BitKeeper/**
+**/ChangeSet
+**/ChangeSet/**
 
-// Serena Dimensions Version 10
-"**/.metadata"
-"**/.metadata/**"
+[Mercurial]
+**/.hg
+**/.hg/**
+**/.hgignore
 
-// Mercurial
-"**/.hg"
-"**/.hg/**"
-"**/.hgignore"
+[Subversion]
+**/.svn
+**/.svn/**
 
-// Git
-"**/.git"
-"**/.git/**"
-"**/.gitignore"
-"**/.gitmodules"
+[Json files]
+**/*.json
 
-// BitKeeper
-"**/BitKeeper"
-"**/BitKeeper/**"
-"**/ChangeSet"
-"**/ChangeSet/**"
+[Netbeans]
+**/nb-configuration.xml
 
-// Darcs
-"**/_darcs"
-"**/_darcs/**"
-"**/.darcsrepo"
-"**/.darcsrepo/**"
-"**/-darcs-backup*"
-"**/.darcs-temp-mail"
+[Descriptors]
+**/MANIFEST.MF
 
-// Maven project's temporary files
-"**/target/**"
-"**/test-output/**"
-"**/release.properties"
-"**/dependency-reduced-pom.xml"
-"**/release-pom.xml"
-"**/pom.xml.releaseBackup"
+[SurroundSCM]
+**/.MySCMServerInfo
 
-// Code coverage tools
-"**/cobertura.ser"
-"**/.clover/**"
+[Markdown files]
+**/*.md
 
-// Eclipse project files
-"**/.classpath"
-"**/.project"
-"**/.settings/**"
+[Checksum files]
+**/*.md5
+**/*.sha1
 
-// IDEA projet files
-"**/*.iml"
-"**/*.ipr"
-"**/*.iws"
-".idea/**"
+[IDEA projet files]
+**/*.iml
+**/*.ipr
+**/*.iws
+.idea/**
 
-// Netbeans
-"**/nb-configuration.xml"
+[Visual SourceSafe]
+**/vssver.scc
 
-// Descriptors
-"**/MANIFEST.MF"
+[ServiceLoader files]
+**/META-INF/services/**
 
-// Binary files - images
-"**/*.jpg"
-"**/*.png"
-"**/*.gif"
-"**/*.ico"
-"**/*.bmp"
-"**/*.tiff"
-"**/*.tif"
-"**/*.cr2"
-"**/*.xcf"
+[Code coverage tools]
+**/cobertura.ser
+**/.clover/**
 
-// Binary files - programs
-"**/*.class"
-"**/*.exe"
-"**/*.dll"
-"**/*.so"
+[Eclipse project files]
+**/.classpath
+**/.project
+**/.settings/**
 
-// Checksum files
-"**/*.md5"
-"**/*.sha1"
+[Binary files - images]
+**/*.jpg
+**/*.png
+**/*.gif
+**/*.ico
+**/*.bmp
+**/*.tiff
+**/*.tif
+**/*.cr2
+**/*.xcf
 
-// Binary files - archives
-"**/*.jar"
-"**/*.zip"
-"**/*.rar"
-"**/*.tar"
-"**/*.tar.gz"
-"**/*.tar.bz2"
-"**/*.gz"
+[Binary files - programs]
+**/*.class
+**/*.exe
+**/*.dll
+**/*.so
 
-// Binary files - documents
-"**/*.xls"
+[Binary files - archives]
+**/*.jar
+**/*.zip
+**/*.rar
+**/*.tar
+**/*.tar.gz
+**/*.tar.bz2
+**/*.gz
 
-// ServiceLoader files
-"**/META-INF/services/**"
+[Office documents]
+**/*.xls
+**/*.doc
+**/*.odt
+**/*.ods
+**/*.pdf
+**/*.xlsx
+**/*.docx
+**/*.ppt
+**/*.pptx
 
-// Markdown files
-"**/*.md"
+[Serena Dimensions Version 10]
+**/.metadata
+**/.metadata/**
 
-// Office documents
-"**/*.xls"
-"**/*.doc"
-"**/*.odt"
-"**/*.ods"
-"**/*.pdf"
+[Maven project's temporary files]
+**/target/**
+**/test-output/**
+**/release.properties
+**/dependency-reduced-pom.xml
+**/release-pom.xml
+**/pom.xml.releaseBackup
 
-// Travis
-"**/.travis.yml"
+[Miscellaneous typical temporary files]
+**/*~
+**/#*#
+**/.#*
+**/%*%
+**/._*
+**/.repository/**
 
-// Flash
-"**/*.swf"
-
-// Json files
-"**/*.json"
-
-// Fonts
-"**/*.svg"
-"**/*.eot"
-"**/*.ttf"
-"**/*.woff"
-
-// Office documents
-"**/*.xlsx"
-"**/*.docx"
-"**/*.ppt"
-"**/*.pptx"
-    
-// Others
-"**/*.dat"
-"**/*.lck"
-"**/*.log"
-"**/*.ctrl"
-"**/*.providers"
-"**/*.factories"
-"**/*.properties"
-"**/META-INF/**"
-".factorypath"
-".gitattributes"
-"mvnw"
-"mvnw.cmd"
-"ICLA"
-"KEYS"
-"NOTICE"
-"LICENSE"
+[Customize]
+mvnw
+mvnw.cmd
+ICLA
+KEYS
+NOTICE
+LICENSE
+**/*.dat
+**/*.lck
+**/*.log
+**/*.doc
+**/*.docx
+**/*.ppt
+**/*.ctrl
+**/*.providers
+**/*.factories
+**/*.properties
+**/META-INF/**
+.factorypath
+.gitattributes
 ```
 
 
