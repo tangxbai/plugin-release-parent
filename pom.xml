@@ -126,7 +126,6 @@
 				<includes>
 					<include>NOTICE</include>
 					<include>LICENSE</include>
-					<include>CHANGELOG.md</include>
 				</includes>
 			</resource>
 		</resources>
@@ -183,23 +182,23 @@
 						<configuration>
 							<header>${project.basedir}/license.txt</header>
 							<excludes>
-								<exclude>**/*.dat</exclude>
-								<exclude>**/*.lck</exclude>
-								<exclude>**/*.log</exclude>
-								<exclude>**/*.ctrl</exclude>
-								<include>**/*.json</include>
-								<include>**/*.providers</include>
-								<include>**/*.factories</include>
-								<include>**/*.properties</include>
-								<include>**/META-INF/**</include>
-								<exclude>.factorypath</exclude>
-								<exclude>.gitattributes</exclude>
 								<exclude>mvnw</exclude>
 								<exclude>mvnw.cmd</exclude>
 								<exclude>ICLA</exclude>
 								<exclude>KEYS</exclude>
 								<exclude>NOTICE</exclude>
 								<exclude>LICENSE</exclude>
+								<exclude>**/*.dat</exclude>
+								<exclude>**/*.lck</exclude>
+								<exclude>**/*.log</exclude>
+								<exclude>**/*.ctrl</exclude>
+								<exclude>**/*.json</exclude>
+								<exclude>**/*.providers</exclude>
+								<exclude>**/*.factories</exclude>
+								<exclude>**/*.properties</exclude>
+								<exclude>**/META-INF/**</exclude>
+								<exclude>.factorypath</exclude>
+								<exclude>.gitattributes</exclude>
 							</excludes>
 							<mapping>
 								<xml.vm>XML_STYLE</xml.vm>
