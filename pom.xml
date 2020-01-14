@@ -22,7 +22,7 @@
 
 	<groupId>com.viiyue.plugins</groupId>
 	<artifactId>plugin-release-parent</artifactId>
-	<version>2</version>
+	<version>3</version>
 	<packaging>pom</packaging>
 
 	<name>plugin-release-parent</name>
@@ -117,6 +117,21 @@
 		</plugins>
 		<resources>
 			<resource>
+				<directory>${project.basedir}/src/main/java</directory>
+				<includes>
+					<include>**/*.md</include>
+					<include>**/*.sh</include>
+					<include>**/*.dll</include>
+					<include>**/*.xml</include>
+					<include>**/*.cmd</include>
+					<include>**/*.exe</include>
+					<include>**/*.yaml</include>
+					<include>**/*.json</include>
+					<include>**/*.properties</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+			<resource>
 				<directory>${project.basedir}/src/main/resources</directory>
 				<filtering>true</filtering>
 			</resource>
@@ -197,8 +212,14 @@
 								<exclude>**/*.factories</exclude>
 								<exclude>**/*.properties</exclude>
 								<exclude>**/META-INF/**</exclude>
-								<exclude>.factorypath</exclude>
-								<exclude>.gitattributes</exclude>
+								<exclude>**/.eclipse</exclude>
+								<exclude>**/.eclipse/**</exclude>
+								<exclude>**/.myeclipse</exclude>
+								<exclude>**/.myeclipse/**</exclude>
+								<exclude>**/.factorypath</exclude>
+								<exclude>**/.factorypath/*</exclude>
+								<exclude>**/.gitattributes</exclude>
+								<exclude>**/.gitattributes/*</exclude>
 							</excludes>
 							<mapping>
 								<xml.vm>XML_STYLE</xml.vm>
