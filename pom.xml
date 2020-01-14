@@ -121,6 +121,7 @@
 				<includes>
 					<include>**/*.md</include>
 					<include>**/*.sh</include>
+					<include>**/*.bat</include>
 					<include>**/*.dll</include>
 					<include>**/*.xml</include>
 					<include>**/*.cmd</include>
@@ -207,7 +208,6 @@
 								<exclude>**/*.lck</exclude>
 								<exclude>**/*.log</exclude>
 								<exclude>**/*.ctrl</exclude>
-								<exclude>**/*.json</exclude>
 								<exclude>**/*.providers</exclude>
 								<exclude>**/*.factories</exclude>
 								<exclude>**/*.properties</exclude>
