@@ -1,28 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-
-    Copyright (C) 2019 the original author or authors.
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-        http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-
--->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.viiyue.plugins</groupId>
 	<artifactId>plugin-release-parent</artifactId>
-	<version>2</version>
+	<version>3</version>
 	<packaging>pom</packaging>
 
 	<name>plugin-release-parent</name>
@@ -102,20 +85,14 @@
 	</properties>
 
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${compiler.version}</version>
-				<configuration>
-					<optimize>true</optimize>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-					<encoding>${project.build.sourceEncoding}</encoding>
-				</configuration>
-			</plugin>
-		</plugins>
 		<resources>
+			<resource>
+				<directory>${project.basedir}/src/main/java</directory>
+				<filtering>false</filtering>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
 			<resource>
 				<directory>${project.basedir}/src/main/resources</directory>
 				<filtering>true</filtering>
@@ -129,14 +106,19 @@
 				</includes>
 			</resource>
 		</resources>
-		<testResources>
-			<testResource>
-				<directory>src/test/java</directory>
-			</testResource>
-			<testResource>
-				<directory>src/test/resources</directory>
-			</testResource>
-		</testResources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${compiler.version}</version>
+				<configuration>
+					<optimize>true</optimize>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 
 	<reporting>
@@ -181,6 +163,9 @@
 						</executions>
 						<configuration>
 							<header>${project.basedir}/license.txt</header>
+							<headerDefinitions>
+		                        <headerDefinition>${project.basedir}/xml-header-style.xml</headerDefinition>
+		                    </headerDefinitions>
 							<excludes>
 								<exclude>mvnw</exclude>
 								<exclude>mvnw.cmd</exclude>
@@ -192,16 +177,22 @@
 								<exclude>**/*.lck</exclude>
 								<exclude>**/*.log</exclude>
 								<exclude>**/*.ctrl</exclude>
-								<exclude>**/*.json</exclude>
 								<exclude>**/*.providers</exclude>
 								<exclude>**/*.factories</exclude>
 								<exclude>**/*.properties</exclude>
 								<exclude>**/META-INF/**</exclude>
-								<exclude>.factorypath</exclude>
-								<exclude>.gitattributes</exclude>
+								<exclude>**/.eclipse</exclude>
+								<exclude>**/.eclipse/**</exclude>
+								<exclude>**/.myeclipse</exclude>
+								<exclude>**/.myeclipse/**</exclude>
+								<exclude>**/.factorypath</exclude>
+								<exclude>**/.factorypath/*</exclude>
+								<exclude>**/.gitattributes</exclude>
+								<exclude>**/.gitattributes/*</exclude>
 							</excludes>
 							<mapping>
-								<xml.vm>XML_STYLE</xml.vm>
+								<xml.vm>XML_FILE_STYLE</xml.vm>
+								<xml>XML_FILE_STYLE</xml>
 							</mapping>
 						</configuration>
 					</plugin>

@@ -258,16 +258,19 @@ LICENSE
 **/*.dat
 **/*.lck
 **/*.log
-**/*.doc
-**/*.docx
-**/*.ppt
 **/*.ctrl
 **/*.providers
 **/*.factories
 **/*.properties
 **/META-INF/**
-.factorypath
-.gitattributes
+**/.eclipse
+**/.eclipse/**
+**/.myeclipse
+**/.myeclipse/**
+**/.factorypath
+**/.factorypath/**
+**/.gitattributes
+**/.gitattributes/**
 ```
 
 
